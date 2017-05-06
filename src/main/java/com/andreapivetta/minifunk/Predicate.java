@@ -1,8 +1,17 @@
 package com.andreapivetta.minifunk;
 
 /**
- * Created by andrea on 5/6/17.
+ * Represents a predicate (boolean-valued function) of one argument.
+ *
+ * @author Andrea Pivetta
  */
 public interface Predicate<T> {
-    boolean test(T value);
+
+    /**
+     * Evaluates this predicate on the given argument.
+     *
+     * @param t the input argument
+     * @return true if the input argument matches the predicate, otherwise false
+     */
+    boolean test(T t);
 }

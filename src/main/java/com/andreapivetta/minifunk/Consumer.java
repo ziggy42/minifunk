@@ -1,8 +1,16 @@
 package com.andreapivetta.minifunk;
 
 /**
- * Created by andrea on 5/6/17.
+ * Represents an operation that accepts a single input argument and returns no result.
+ *
+ * @author Andrea Pivetta
  */
 public interface Consumer<T> {
+
+    /**
+     * Performs this operation on the given argument.
+     *
+     * @param value the input argument
+     */
     void accept(T value);
 }

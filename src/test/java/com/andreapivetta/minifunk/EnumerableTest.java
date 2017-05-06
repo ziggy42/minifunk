@@ -8,10 +8,24 @@ import java.util.List;
 
 import static org.junit.Assert.*;
 
-/**
- * Created by andrea on 5/6/17.
- */
 public class EnumerableTest {
+
+    @Test
+    public void asList() throws Exception {
+        List<String> strings = Enumerable
+                .from(Arrays.asList("apple", "pear", "lemon"))
+                .asList();
+
+        assertNotNull(strings);
+        assertEquals(3, strings.size());
+
+        strings = Enumerable
+                .from(new String[]{"apple", "pear", "lemon"})
+                .asList();
+
+        assertNotNull(strings);
+        assertEquals(3, strings.size());
+    }
 
     @Test
     public void forEach() throws Exception {
@@ -70,7 +84,7 @@ public class EnumerableTest {
     public void reduce() throws Exception {
         Integer total = Enumerable
                 .from(Arrays.asList(1, 2, 3, 4))
-                .reduce(0, new BinaryOperator<Integer, Integer>() {
+                .reduce(0, new BiFunction<Integer, Integer>() {
                     @Override
                     public Integer apply(Integer accumulator, Integer value) {
                         return accumulator + value;
@@ -81,7 +95,7 @@ public class EnumerableTest {
         assertEquals(Integer.valueOf(10), total);
 
         String concat = Enumerable.from(Arrays.asList('a', 'b', 'c'))
-                .reduce("", new BinaryOperator<Character, String>() {
+                .reduce("", new BiFunction<Character, String>() {
                     @Override
                     public String apply(String accumulator, Character value) {
                         return accumulator + value;

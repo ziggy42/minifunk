@@ -1,8 +1,17 @@
 package com.andreapivetta.minifunk;
 
 /**
- * Created by andrea on 5/6/17.
+ * Represents a function that accepts one argument and produces a result.
+ *
+ * @author Andrea Pivetta
  */
 public interface Function<T, R> {
-    R apply(T value);
+
+    /**
+     * Applies this function to the given argument.
+     *
+     * @param t the function argument
+     * @return
+     */
+    R apply(T t);
 }
