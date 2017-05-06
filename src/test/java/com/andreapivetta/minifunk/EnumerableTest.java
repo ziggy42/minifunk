@@ -15,6 +15,24 @@ import static org.junit.Assert.assertTrue;
 public class EnumerableTest {
 
     @Test
+    public void forEach() throws Exception {
+        final List<String> result = new ArrayList<String>();
+        Enumerable
+                .from(Arrays.asList("apple", "pear", "lemon"))
+                .forEach(new Consumer<String>() {
+                    @Override
+                    public void accept(String value) {
+                        result.add(value);
+                    }
+                });
+
+        assertEquals(3, result.size());
+        assertEquals("apple", result.get(0));
+        assertEquals("pear", result.get(1));
+        assertEquals("lemon", result.get(2));
+    }
+
+    @Test
     public void filter() throws Exception {
         List<String> result = Enumerable
                 .from(Arrays.asList("apple", "pear", "lemon"))
@@ -32,20 +50,20 @@ public class EnumerableTest {
     }
 
     @Test
-    public void forEach() throws Exception {
-        final List<String> result = new ArrayList<String>();
-        Enumerable
+    public void map() throws Exception {
+        List<Integer> result = Enumerable
                 .from(Arrays.asList("apple", "pear", "lemon"))
-                .forEach(new Consumer<String>() {
+                .map(new Function<String, Integer>() {
                     @Override
-                    public void accept(String value) {
-                        result.add(value);
+                    public Integer apply(String value) {
+                        return value.length();
                     }
-                });
+                })
+                .asList();
 
         assertEquals(3, result.size());
-        assertEquals("apple", result.get(0));
-        assertEquals("pear", result.get(1));
-        assertEquals("lemon", result.get(2));
+        assertEquals(Integer.valueOf(5), result.get(0));
+        assertEquals(Integer.valueOf(4), result.get(1));
+        assertEquals(Integer.valueOf(5), result.get(2));
     }
 }

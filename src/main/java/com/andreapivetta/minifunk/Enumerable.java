@@ -41,4 +41,10 @@ public final class Enumerable<T> {
         return this;
     }
 
+    public <R> Enumerable<R> map(Function<T, R> function) {
+        List<R> result = new ArrayList<R>();
+        for (T t : this.list)
+            result.add(function.apply(t));
+        return new Enumerable<R>(result);
+    }
 }
