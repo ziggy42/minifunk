@@ -105,4 +105,9 @@ public class EnumerableTest {
         assertNotNull(concat);
         assertEquals("abc", concat);
     }
+
+    @Test
+    public void count() throws Exception {
+        assertEquals(4, Enumerable.from(Arrays.asList(1, 2, 3, 4)).count());
+    }
 }

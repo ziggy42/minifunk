@@ -102,4 +102,13 @@ public final class Enumerable<T> {
             accumulator = operator.apply(accumulator, value);
         return accumulator;
     }
+
+    /**
+     * Counts the elements contained by this {@link Enumerable}
+     *
+     * @return the count
+     */
+    public int count() {
+        return this.list.size();
+    }
 }
