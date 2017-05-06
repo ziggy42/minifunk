@@ -27,6 +27,11 @@ public final class Enumerable<T> {
         return this.list;
     }
 
+    public void forEach(Consumer<T> consumer) {
+        for (T t : this.list)
+            consumer.accept(t);
+    }
+
     public Enumerable<T> filter(Predicate<T> predicate) {
         List<T> filtered = new ArrayList<T>();
         for (T t : list)
