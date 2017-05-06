@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/minifunk.iml" filepath="$PROJECT_DIR$/.idea/modules/minifunk.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/minifunk_main.iml" filepath="$PROJECT_DIR$/.idea/modules/minifunk_main.iml" group="minifunk" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/minifunk_test.iml" filepath="$PROJECT_DIR$/.idea/modules/minifunk_test.iml" group="minifunk" />
+    </modules>
+  </component>
+</project>
