@@ -6,8 +6,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 /**
  * Created by andrea on 5/6/17.
@@ -65,5 +64,31 @@ public class EnumerableTest {
         assertEquals(Integer.valueOf(5), result.get(0));
         assertEquals(Integer.valueOf(4), result.get(1));
         assertEquals(Integer.valueOf(5), result.get(2));
+    }
+
+    @Test
+    public void reduce() throws Exception {
+        Integer total = Enumerable
+                .from(Arrays.asList(1, 2, 3, 4))
+                .reduce(0, new BinaryOperator<Integer, Integer>() {
+                    @Override
+                    public Integer apply(Integer accumulator, Integer value) {
+                        return accumulator + value;
+                    }
+                });
+
+        assertNotNull(total);
+        assertEquals(Integer.valueOf(10), total);
+
+        String concat = Enumerable.from(Arrays.asList('a', 'b', 'c'))
+                .reduce("", new BinaryOperator<Character, String>() {
+                    @Override
+                    public String apply(String accumulator, Character value) {
+                        return accumulator + value;
+                    }
+                });
+
+        assertNotNull(concat);
+        assertEquals("abc", concat);
     }
 }

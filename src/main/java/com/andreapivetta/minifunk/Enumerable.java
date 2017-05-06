@@ -47,4 +47,10 @@ public final class Enumerable<T> {
             result.add(function.apply(t));
         return new Enumerable<R>(result);
     }
+
+    public <R> R reduce(R accumulator, BinaryOperator<T, R> operator) {
+        for (T value : this.list)
+            accumulator = operator.apply(accumulator, value);
+        return accumulator;
+    }
 }
