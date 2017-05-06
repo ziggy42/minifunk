@@ -107,6 +107,32 @@ public class EnumerableTest {
     }
 
     @Test
+    public void find() throws Exception {
+        String value = Enumerable
+                .from(Arrays.asList("Inter", "Milan", "Juventus"))
+                .find(new Predicate<String>() {
+                    @Override
+                    public boolean test(String s) {
+                        return s.startsWith("J");
+                    }
+                });
+
+        assertNotNull(value);
+        assertEquals("Juventus", value);
+
+        value = Enumerable
+                .from(Arrays.asList("Inter", "Milan", "Juventus"))
+                .find(new Predicate<String>() {
+                    @Override
+                    public boolean test(String s) {
+                        return s.startsWith("R");
+                    }
+                });
+
+        assertNull(value);
+    }
+
+    @Test
     public void count() throws Exception {
         assertEquals(4, Enumerable.from(Arrays.asList(1, 2, 3, 4)).count());
     }

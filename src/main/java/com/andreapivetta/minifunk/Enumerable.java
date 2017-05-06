@@ -104,6 +104,19 @@ public final class Enumerable<T> {
     }
 
     /**
+     * Returns the value of the first element that satisfies the provided testing function. Otherwise is returned.
+     *
+     * @param predicate a predicate to apply to each element to determine if it should be returned
+     * @return the founded element
+     */
+    public T find(Predicate<T> predicate) {
+        for (T t : this.list)
+            if (predicate.test(t))
+                return t;
+        return null;
+    }
+
+    /**
      * Counts the elements contained by this {@link Enumerable}
      *
      * @return the count
