@@ -38,6 +38,17 @@ public class StreamTest {
     }
 
     @Test
+    public void distinct() throws Exception {
+        List<String> strings = Stream.from(Arrays.asList("Inter", "Juventus", "Milan", "Juventus"))
+                .distinct()
+                .toList();
+
+        assertNotNull(strings);
+        assertEquals(3, strings.size());
+        assertEquals(Arrays.asList("Inter", "Juventus", "Milan"), strings);
+    }
+
+    @Test
     public void count() throws Exception {
         assertEquals(4, Stream.from(Arrays.asList(1, 2, 3, 4)).count());
     }

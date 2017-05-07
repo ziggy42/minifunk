@@ -90,6 +90,15 @@ public final class Stream<T> {
     }
 
     /**
+     * Returns a stream consisting of the distinct elements of this stream.
+     *
+     * @return the new {@link Stream}
+     */
+    public Stream<T> distinct() {
+        return new Stream<T>(new ArrayList<T>(new LinkedHashSet<T>(this.list)));
+    }
+
+    /**
      * Returns an {@link Stream} consisting of the elements of this {@link Stream} that match the given
      * predicate.
      *
