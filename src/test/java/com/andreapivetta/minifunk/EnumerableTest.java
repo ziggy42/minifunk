@@ -8,6 +8,7 @@ import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 
 import static org.junit.Assert.*;
@@ -108,6 +109,23 @@ public class EnumerableTest {
 
         assertNotNull(concat);
         assertEquals("abc", concat);
+    }
+
+    @Test
+    public void sort() throws Exception {
+        List<String> strings = Enumerable
+                .from(Arrays.asList("Real Madrid", "Inter", "Milan", "Juventus"))
+                .sort(new Comparator<String>() {
+                    @Override
+                    public int compare(String s, String t1) {
+                        return s.compareTo(t1);
+                    }
+                })
+                .asList();
+
+        assertNotNull(strings);
+        assertEquals(4, strings.size());
+        assertEquals("Inter", strings.get(0));
     }
 
     @Test

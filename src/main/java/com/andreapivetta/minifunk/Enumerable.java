@@ -5,9 +5,7 @@ import com.andreapivetta.minifunk.function.Consumer;
 import com.andreapivetta.minifunk.function.Function;
 import com.andreapivetta.minifunk.function.Predicate;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 /**
  * A sequence of elements supporting different aggregate operations.
@@ -105,6 +103,18 @@ public final class Enumerable<T> {
         for (T value : this.list)
             accumulator = operator.apply(accumulator, value);
         return accumulator;
+    }
+
+    /**
+     * Returns an {@link Enumerable} consisting of the sorted version of the current one.
+     *
+     * @param comparator the comparator function
+     * @return the result of the sort
+     */
+    public Enumerable<T> sort(Comparator<T> comparator) {
+        List<T> copy = new ArrayList<T>(this.list);
+        Collections.sort(copy, comparator);
+        return new Enumerable<T>(copy);
     }
 
     /**
