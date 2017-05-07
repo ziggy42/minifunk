@@ -200,7 +200,7 @@ public final class Stream<T> {
      */
     public Stream<T> limit(int maxSize) {
         if (maxSize < 0)
-            throw new IllegalArgumentException("maxSize must be positive");
+            throw new IllegalArgumentException("maxSize must be greater than 0");
 
         if (this.list.size() < maxSize)
             return new Stream<T>(this.list);
@@ -284,6 +284,20 @@ public final class Stream<T> {
         for (T value : this.list)
             accumulator = operator.apply(accumulator, value);
         return accumulator;
+    }
+
+    /**
+     * Returns a stream consisting of the remaining elements of this stream after discarding the first n elements of the stream.
+     *
+     * @param n the number of leading elements to skip
+     * @return the new {@link Stream}
+     * @throws IllegalArgumentException if n is negative
+     */
+    public Stream<T> skip(int n) {
+        if (n < 0)
+            throw new IllegalArgumentException("maxSize must be greater than 0");
+
+        return new Stream<T>(this.list.subList(n, this.list.size()));
     }
 
     /**

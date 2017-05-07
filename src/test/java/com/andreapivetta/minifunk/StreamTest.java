@@ -253,6 +253,15 @@ public class StreamTest {
     }
 
     @Test
+    public void skip() throws Exception {
+        List<Integer> limited = Stream.from(Arrays.asList(1, 2, 3)).skip(2).toList();
+
+        assertNotNull(limited);
+        assertEquals(1, limited.size());
+        assertEquals(Integer.valueOf(3), limited.get(0));
+    }
+
+    @Test
     public void sorted() throws Exception {
         List<String> strings = Stream
                 .from(Arrays.asList("Real Madrid", "Inter", "Milan", "Juventus"))
