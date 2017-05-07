@@ -1,10 +1,20 @@
 # minifunk
-This library targets `Java 6` and wraps a `T[]` or `List<T>` to add many methods such as:
-* `forEach`
-* `map`
+This library targets `Java 6` and wraps a `T[]` or `List<T>` to add:
+* `allMatch`
+* `anyMatch`
+* `count`
+* `distinct`
 * `filter`
-* `reduce`
-* ...
+* `findFirst`
+* `flatMap`
+* `forEach`
+* `limit`
+* `map`
+* `max`
+* `min`
+* `noneMatch`
+* `skip`
+* `sorted`
 
 ## Example
 ```java
