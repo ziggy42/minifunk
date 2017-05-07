@@ -181,4 +181,11 @@ public class EnumerableTest {
     public void count() throws Exception {
         assertEquals(4, Enumerable.from(Arrays.asList(1, 2, 3, 4)).count());
     }
+
+    @Test
+    public void testToString() throws Exception {
+        Enumerable<String> enumerable = Enumerable
+                .from(Arrays.asList("Real Madrid", "Inter", "Milan", "Juventus"));
+        assertEquals("[Real Madrid, Inter, Milan, Juventus]", enumerable.toString());
+    }
 }

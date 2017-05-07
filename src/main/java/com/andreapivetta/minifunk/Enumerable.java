@@ -164,4 +164,9 @@ public final class Enumerable<T> {
     public int count() {
         return this.list.size();
     }
+
+    @Override
+    public String toString() {
+        return Arrays.toString(this.list.toArray());
+    }
 }
