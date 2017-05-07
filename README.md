@@ -9,7 +9,7 @@ This library targets `Java 6` and wraps a `T[]` or `List<T>` to add many methods
 ## Example
 ```java
 Stream
-    .from(Arrays.asList("apple", "pear", "lemon"))
+    .of("apple", "pear", "lemon")
     .filter(new Predicate<String>() {
         @Override
         public boolean test(String value) {
