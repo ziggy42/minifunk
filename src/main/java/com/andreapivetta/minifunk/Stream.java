@@ -169,6 +169,22 @@ public final class Stream<T> {
     }
 
     /**
+     * Returns a stream consisting of the elements of this stream, truncated to be no longer than maxSize in length.
+     *
+     * @param maxSize the number of elements the stream should be limited to
+     * @return the new {@link Stream}
+     * @throws IllegalArgumentException if maxSize is less than 0
+     */
+    public Stream<T> limit(int maxSize) {
+        if (maxSize < 0)
+            throw new IllegalArgumentException("maxSize must be positive");
+
+        if (this.list.size() < maxSize)
+            return new Stream<T>(this.list);
+        return new Stream<T>(this.list.subList(0, maxSize));
+    }
+
+    /**
      * Returns an {@link Stream} consisting of the results of applying the given function to the elements of this
      * {@link Stream}.
      *

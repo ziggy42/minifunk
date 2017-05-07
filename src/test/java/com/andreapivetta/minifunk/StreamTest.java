@@ -143,6 +143,27 @@ public class StreamTest {
     }
 
     @Test
+    public void limit() throws Exception {
+        List<Integer> limited = Stream.from(Arrays.asList(1, 2, 3)).limit(2).toList();
+
+        assertNotNull(limited);
+        assertEquals(2, limited.size());
+        assertEquals(Integer.valueOf(1), limited.get(0));
+
+        limited = Stream.from(Arrays.asList(1, 2, 3)).limit(3).toList();
+
+        assertNotNull(limited);
+        assertEquals(3, limited.size());
+        assertEquals(Integer.valueOf(1), limited.get(0));
+
+        limited = Stream.from(Arrays.asList(1, 2, 3)).limit(4).toList();
+
+        assertNotNull(limited);
+        assertEquals(3, limited.size());
+        assertEquals(Integer.valueOf(1), limited.get(0));
+    }
+
+    @Test
     public void map() throws Exception {
         List<Integer> result = Stream
                 .from(Arrays.asList("apple", "pear", "lemon"))
