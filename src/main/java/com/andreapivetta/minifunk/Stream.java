@@ -204,6 +204,28 @@ public final class Stream<T> {
     }
 
     /**
+     * Returns the maximum element of this stream according to the provided Comparator.
+     *
+     * @param comparator a Comparator to compare elements of this stream
+     * @return the maximum element of this stream
+     * @throws NoSuchElementException if the collection is empty
+     */
+    public T max(Comparator<? super T> comparator) {
+        return Collections.max(this.list, comparator);
+    }
+
+    /**
+     * Returns the minimum element of this stream according to the provided Comparator.
+     *
+     * @param comparator a Comparator to compare elements of this stream
+     * @return the minimum element of this stream
+     * @throws NoSuchElementException if the collection is empty
+     */
+    public T min(Comparator<? super T> comparator) {
+        return Collections.min(this.list, comparator);
+    }
+
+    /**
      * Performs a reduction on the elements of this {@link Stream}, using the provided initial accumulator value
      * and an associative accumulation function, and returns the reduced value.
      *

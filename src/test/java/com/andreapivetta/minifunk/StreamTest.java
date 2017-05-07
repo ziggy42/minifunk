@@ -182,6 +182,32 @@ public class StreamTest {
     }
 
     @Test
+    public void max() throws Exception {
+        Integer max = Stream.from(Arrays.asList(1, 2, 4, 5, 3))
+                .max(new Comparator<Integer>() {
+                    @Override
+                    public int compare(Integer integer, Integer t1) {
+                        return integer.compareTo(t1);
+                    }
+                });
+
+        assertEquals(Integer.valueOf(5), max);
+    }
+
+    @Test
+    public void min() throws Exception {
+        Integer min = Stream.from(Arrays.asList(2, 4, 5, 3, 1, 7))
+                .min(new Comparator<Integer>() {
+                    @Override
+                    public int compare(Integer integer, Integer t1) {
+                        return integer.compareTo(t1);
+                    }
+                });
+
+        assertEquals(Integer.valueOf(1), min);
+    }
+
+    @Test
     public void reduce() throws Exception {
         Integer total = Stream
                 .from(Arrays.asList(1, 2, 3, 4))
