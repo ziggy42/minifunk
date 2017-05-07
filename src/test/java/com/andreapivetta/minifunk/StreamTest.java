@@ -13,18 +13,18 @@ import java.util.List;
 
 import static org.junit.Assert.*;
 
-public class EnumerableTest {
+public class StreamTest {
 
     @Test
     public void asList() throws Exception {
-        List<String> strings = Enumerable
+        List<String> strings = Stream
                 .from(Arrays.asList("apple", "pear", "lemon"))
                 .asList();
 
         assertNotNull(strings);
         assertEquals(3, strings.size());
 
-        strings = Enumerable
+        strings = Stream
                 .from(new String[]{"apple", "pear", "lemon"})
                 .asList();
 
@@ -35,7 +35,7 @@ public class EnumerableTest {
     @Test
     public void forEach() throws Exception {
         final List<String> result = new ArrayList<String>();
-        Enumerable
+        Stream
                 .from(Arrays.asList("apple", "pear", "lemon"))
                 .forEach(new Consumer<String>() {
                     @Override
@@ -52,7 +52,7 @@ public class EnumerableTest {
 
     @Test
     public void filter() throws Exception {
-        List<String> result = Enumerable
+        List<String> result = Stream
                 .from(Arrays.asList("apple", "pear", "lemon"))
                 .filter(new Predicate<String>() {
                     @Override
@@ -69,7 +69,7 @@ public class EnumerableTest {
 
     @Test
     public void map() throws Exception {
-        List<Integer> result = Enumerable
+        List<Integer> result = Stream
                 .from(Arrays.asList("apple", "pear", "lemon"))
                 .map(new Function<String, Integer>() {
                     @Override
@@ -87,7 +87,7 @@ public class EnumerableTest {
 
     @Test
     public void reduce() throws Exception {
-        Integer total = Enumerable
+        Integer total = Stream
                 .from(Arrays.asList(1, 2, 3, 4))
                 .reduce(0, new BiFunction<Integer, Integer>() {
                     @Override
@@ -99,7 +99,7 @@ public class EnumerableTest {
         assertNotNull(total);
         assertEquals(Integer.valueOf(10), total);
 
-        String concat = Enumerable.from(Arrays.asList('a', 'b', 'c'))
+        String concat = Stream.from(Arrays.asList('a', 'b', 'c'))
                 .reduce("", new BiFunction<Character, String>() {
                     @Override
                     public String apply(String accumulator, Character value) {
@@ -113,7 +113,7 @@ public class EnumerableTest {
 
     @Test
     public void sort() throws Exception {
-        List<String> strings = Enumerable
+        List<String> strings = Stream
                 .from(Arrays.asList("Real Madrid", "Inter", "Milan", "Juventus"))
                 .sort(new Comparator<String>() {
                     @Override
@@ -130,7 +130,7 @@ public class EnumerableTest {
 
     @Test
     public void find() throws Exception {
-        String value = Enumerable
+        String value = Stream
                 .from(Arrays.asList("Inter", "Milan", "Juventus"))
                 .find(new Predicate<String>() {
                     @Override
@@ -142,7 +142,7 @@ public class EnumerableTest {
         assertNotNull(value);
         assertEquals("Juventus", value);
 
-        value = Enumerable
+        value = Stream
                 .from(Arrays.asList("Inter", "Milan", "Juventus"))
                 .find(new Predicate<String>() {
                     @Override
@@ -156,7 +156,7 @@ public class EnumerableTest {
 
     @Test
     public void every() throws Exception {
-        assertTrue(Enumerable.from(new Integer[]{1, 2, 3, 4})
+        assertTrue(Stream.from(new Integer[]{1, 2, 3, 4})
                 .every(new Predicate<Integer>() {
                     @Override
                     public boolean test(Integer integer) {
@@ -167,7 +167,7 @@ public class EnumerableTest {
 
     @Test
     public void some() throws Exception {
-        assertTrue(Enumerable.from(new Integer[]{1, 2, 3, 4})
+        assertTrue(Stream.from(new Integer[]{1, 2, 3, 4})
                 .some(new Predicate<Integer>() {
                           @Override
                           public boolean test(Integer integer) {
@@ -179,13 +179,13 @@ public class EnumerableTest {
 
     @Test
     public void count() throws Exception {
-        assertEquals(4, Enumerable.from(Arrays.asList(1, 2, 3, 4)).count());
+        assertEquals(4, Stream.from(Arrays.asList(1, 2, 3, 4)).count());
     }
 
     @Test
     public void testToString() throws Exception {
-        Enumerable<String> enumerable = Enumerable
+        Stream<String> stream = Stream
                 .from(Arrays.asList("Real Madrid", "Inter", "Milan", "Juventus"));
-        assertEquals("[Real Madrid, Inter, Milan, Juventus]", enumerable.toString());
+        assertEquals("[Real Madrid, Inter, Milan, Juventus]", stream.toString());
     }
 }

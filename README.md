@@ -8,7 +8,7 @@ This library targets `Java 6` and wraps a `T[]` or `List<T>` to add many methods
 
 ## Example
 ```java
-Enumerable
+Stream
     .from(Arrays.asList("apple", "pear", "lemon"))
     .filter(new Predicate<String>() {
         @Override
