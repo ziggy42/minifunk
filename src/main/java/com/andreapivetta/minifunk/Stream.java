@@ -135,14 +135,19 @@ public final class Stream<T> {
     }
 
     /**
-     * Returns a stream consisting of the results of replacing each element of this stream with the contents of a mapped stream produced by applying the provided mapping function to each element.
+     * Returns a stream consisting of the results of replacing each element of this stream with the contents of a
+     * mapped stream produced by applying the provided mapping function to each element.
      *
      * @param mapper a function to apply to each element
      * @param <R>    The element type of the new {@link Stream}
      * @return the new {@link Stream}
+     * @throws IllegalArgumentException if mapper is null
      */
     public <R> Stream<R> flatMap(Function<? super T, ? extends Stream<? extends R>> mapper) {
-        List<R> mapped = new ArrayList<R>(this.list.size());
+        if (mapper == null)
+            throw new IllegalArgumentException("mapper must not be null");
+
+        List<R> mapped = new ArrayList<R>();
         for (T t : this.list)
             mapped.addAll(mapper.apply(t).toList());
         return new Stream<R>(mapped);
