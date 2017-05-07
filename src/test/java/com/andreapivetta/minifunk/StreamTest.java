@@ -97,6 +97,34 @@ public class StreamTest {
     }
 
     @Test
+    public void flatMap() throws Exception {
+        class FootballClub {
+            String name;
+            List<Integer> titles = new ArrayList<Integer>();
+
+            FootballClub(String name, List<Integer> titles) {
+                this.name = name;
+                this.titles = titles;
+            }
+        }
+
+        List<FootballClub> clubs = Arrays.asList(new FootballClub("Milan", Arrays.asList(2011)),
+                new FootballClub("Juventus", Arrays.asList(2012, 2013, 2014, 2015, 2016)));
+
+        List<Integer> titles = Stream.from(clubs)
+                .flatMap(new Function<FootballClub, Stream<Integer>>() {
+                    @Override
+                    public Stream<Integer> apply(FootballClub footballClub) {
+                        return Stream.from(footballClub.titles);
+                    }
+                })
+                .toList();
+
+        assertNotNull(titles);
+        assertEquals(Arrays.asList(2011, 2012, 2013, 2014, 2015, 2016), titles);
+    }
+
+    @Test
     public void forEach() throws Exception {
         final List<String> result = new ArrayList<String>();
         Stream
