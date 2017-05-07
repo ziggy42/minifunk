@@ -137,6 +137,16 @@ public class EnumerableTest {
     }
 
     @Test
+    public void every() throws Exception {
+        assertTrue(Enumerable.from(new Integer[]{1, 2, 3, 4}).every(new Predicate<Integer>() {
+            @Override
+            public boolean test(Integer integer) {
+                return integer > 0;
+            }
+        }));
+    }
+
+    @Test
     public void count() throws Exception {
         assertEquals(4, Enumerable.from(Arrays.asList(1, 2, 3, 4)).count());
     }

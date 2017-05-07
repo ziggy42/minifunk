@@ -121,6 +121,19 @@ public final class Enumerable<T> {
     }
 
     /**
+     * Returns true if every element satisfies the provided testing function.
+     *
+     * @param predicate a predicate to apply to each element
+     * @return true if every element satisfies the testing function.
+     */
+    public boolean every(Predicate<T> predicate) {
+        for (T t : this.list)
+            if (!predicate.test(t))
+                return false;
+        return true;
+    }
+
+    /**
      * Counts the elements contained by this {@link Enumerable}
      *
      * @return the count
