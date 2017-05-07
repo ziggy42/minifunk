@@ -25,8 +25,11 @@ public final class Enumerable<T> {
      *
      * @param list the starting list
      * @return the {@link Enumerable} instance
+     * @throws IllegalArgumentException if list is null
      */
     public static <T> Enumerable<T> from(List<T> list) {
+        if (list == null)
+            throw new IllegalArgumentException("list must not be null");
         return new Enumerable<T>(list);
     }
 
@@ -35,8 +38,11 @@ public final class Enumerable<T> {
      *
      * @param array the starting array
      * @return the {@link Enumerable} instance
+     * @throws IllegalArgumentException if array is null
      */
     public static <T> Enumerable<T> from(T[] array) {
+        if (array == null)
+            throw new IllegalArgumentException("array must not be null");
         return new Enumerable<T>(Arrays.asList(array));
     }
 
@@ -54,8 +60,12 @@ public final class Enumerable<T> {
      * the action throws an exception. Exceptions thrown by the action are relayed to the caller.
      *
      * @param action the action to be performed for each element
+     * @throws IllegalArgumentException if action is null
      */
     public void forEach(Consumer<T> action) {
+        if (action == null)
+            throw new IllegalArgumentException("action must not be null");
+
         for (T t : this.list)
             action.accept(t);
     }
@@ -66,8 +76,12 @@ public final class Enumerable<T> {
      *
      * @param predicate a predicate to apply to each element to determine if it should be included
      * @return the new {@link Enumerable}
+     * @throws IllegalArgumentException if predicate is null
      */
     public Enumerable<T> filter(Predicate<T> predicate) {
+        if (predicate == null)
+            throw new IllegalArgumentException("predicate must not be null");
+
         List<T> filtered = new ArrayList<T>();
         for (T t : list)
             if (predicate.test(t))
@@ -82,8 +96,12 @@ public final class Enumerable<T> {
      * @param mapper a function to apply to each element
      * @param <R>    The element type of the new {@link Enumerable}
      * @return the new {@link Enumerable}
+     * @throws IllegalArgumentException if mapper is null
      */
     public <R> Enumerable<R> map(Function<T, R> mapper) {
+        if (mapper == null)
+            throw new IllegalArgumentException("mapper must not be null");
+
         List<R> result = new ArrayList<R>();
         for (T t : this.list)
             result.add(mapper.apply(t));
@@ -98,8 +116,12 @@ public final class Enumerable<T> {
      * @param operator    a function for combining two values
      * @param <R>         the element type of the reduced value
      * @return the result of the reduction
+     * @throws IllegalArgumentException if operator is null
      */
     public <R> R reduce(R accumulator, BiFunction<T, R> operator) {
+        if (operator == null)
+            throw new IllegalArgumentException("operator must not be null");
+
         for (T value : this.list)
             accumulator = operator.apply(accumulator, value);
         return accumulator;
@@ -110,8 +132,12 @@ public final class Enumerable<T> {
      *
      * @param comparator the comparator function
      * @return the result of the sort
+     * @throws IllegalArgumentException if comparator is null
      */
     public Enumerable<T> sort(Comparator<T> comparator) {
+        if (comparator == null)
+            throw new IllegalArgumentException("comparator must not be null");
+
         List<T> copy = new ArrayList<T>(this.list);
         Collections.sort(copy, comparator);
         return new Enumerable<T>(copy);
@@ -122,8 +148,12 @@ public final class Enumerable<T> {
      *
      * @param predicate a predicate to apply to each element to determine if it should be returned
      * @return the founded element
+     * @throws IllegalArgumentException if predicate is null
      */
     public T find(Predicate<T> predicate) {
+        if (predicate == null)
+            throw new IllegalArgumentException("predicate must not be null");
+
         for (T t : this.list)
             if (predicate.test(t))
                 return t;
@@ -135,8 +165,12 @@ public final class Enumerable<T> {
      *
      * @param predicate a predicate to apply to each element
      * @return true if every element satisfies the testing function.
+     * @throws IllegalArgumentException if predicate is null
      */
     public boolean every(Predicate<T> predicate) {
+        if (predicate == null)
+            throw new IllegalArgumentException("predicate must not be null");
+
         for (T t : this.list)
             if (!predicate.test(t))
                 return false;
@@ -148,8 +182,12 @@ public final class Enumerable<T> {
      *
      * @param predicate a predicate to apply to each element
      * @return true at least one element satisfies the testing function
+     * @throws IllegalArgumentException if predicate is null
      */
     public boolean some(Predicate<T> predicate) {
+        if (predicate == null)
+            throw new IllegalArgumentException("predicate must not be null");
+
         for (T t : this.list)
             if (predicate.test(t))
                 return true;
