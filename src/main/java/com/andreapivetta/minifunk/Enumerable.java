@@ -1,5 +1,10 @@
 package com.andreapivetta.minifunk;
 
+import com.andreapivetta.minifunk.function.BiFunction;
+import com.andreapivetta.minifunk.function.Consumer;
+import com.andreapivetta.minifunk.function.Function;
+import com.andreapivetta.minifunk.function.Predicate;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -103,7 +108,7 @@ public final class Enumerable<T> {
     }
 
     /**
-     * Returns the value of the first element that satisfies the provided testing function. Otherwise is returned.
+     * Returns the value of the first element that satisfies the provided testing function. Otherwise null is returned.
      *
      * @param predicate a predicate to apply to each element to determine if it should be returned
      * @return the founded element

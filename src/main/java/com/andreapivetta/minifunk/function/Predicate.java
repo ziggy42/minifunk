@@ -1,4 +1,4 @@
-package com.andreapivetta.minifunk;
+package com.andreapivetta.minifunk.function;
 
 /**
  * Represents a predicate (boolean-valued function) of one argument.

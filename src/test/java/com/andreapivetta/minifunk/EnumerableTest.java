@@ -1,5 +1,9 @@
 package com.andreapivetta.minifunk;
 
+import com.andreapivetta.minifunk.function.BiFunction;
+import com.andreapivetta.minifunk.function.Consumer;
+import com.andreapivetta.minifunk.function.Function;
+import com.andreapivetta.minifunk.function.Predicate;
 import org.junit.Test;
 
 import java.util.ArrayList;

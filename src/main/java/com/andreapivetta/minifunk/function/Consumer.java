@@ -1,4 +1,4 @@
-package com.andreapivetta.minifunk;
+package com.andreapivetta.minifunk.function;
 
 /**
  * Represents an operation that accepts a single input argument and returns no result.

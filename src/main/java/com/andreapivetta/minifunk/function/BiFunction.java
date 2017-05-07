@@ -1,4 +1,4 @@
-package com.andreapivetta.minifunk;
+package com.andreapivetta.minifunk.function;
 
 /**
  * Represents a function that accepts two arguments and produces a result.
