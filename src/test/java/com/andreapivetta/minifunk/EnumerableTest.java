@@ -138,12 +138,25 @@ public class EnumerableTest {
 
     @Test
     public void every() throws Exception {
-        assertTrue(Enumerable.from(new Integer[]{1, 2, 3, 4}).every(new Predicate<Integer>() {
-            @Override
-            public boolean test(Integer integer) {
-                return integer > 0;
-            }
-        }));
+        assertTrue(Enumerable.from(new Integer[]{1, 2, 3, 4})
+                .every(new Predicate<Integer>() {
+                    @Override
+                    public boolean test(Integer integer) {
+                        return integer > 0;
+                    }
+                }));
+    }
+
+    @Test
+    public void some() throws Exception {
+        assertTrue(Enumerable.from(new Integer[]{1, 2, 3, 4})
+                .some(new Predicate<Integer>() {
+                          @Override
+                          public boolean test(Integer integer) {
+                              return integer > 2;
+                          }
+                      }
+                ));
     }
 
     @Test

@@ -134,6 +134,19 @@ public final class Enumerable<T> {
     }
 
     /**
+     * Returns true if at least one element satisfies the provided testing function.
+     *
+     * @param predicate a predicate to apply to each element
+     * @return true at least one element satisfies the testing function
+     */
+    public boolean some(Predicate<T> predicate) {
+        for (T t : this.list)
+            if (predicate.test(t))
+                return true;
+        return false;
+    }
+
+    /**
      * Counts the elements contained by this {@link Enumerable}
      *
      * @return the count
