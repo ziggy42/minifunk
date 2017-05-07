@@ -208,6 +208,25 @@ public class StreamTest {
     }
 
     @Test
+    public void noneMatch() throws Exception {
+        assertFalse(Stream.from(new Integer[]{1, 2, 3, 4})
+                .noneMatch(new Predicate<Integer>() {
+                    @Override
+                    public boolean test(Integer integer) {
+                        return integer > 2;
+                    }
+                }));
+
+        assertTrue(Stream.from(new Integer[]{1, 2, 3, 4})
+                .noneMatch(new Predicate<Integer>() {
+                    @Override
+                    public boolean test(Integer integer) {
+                        return integer > 7;
+                    }
+                }));
+    }
+
+    @Test
     public void reduce() throws Exception {
         Integer total = Stream
                 .from(Arrays.asList(1, 2, 3, 4))

@@ -67,7 +67,7 @@ public final class Stream<T> {
      * Returns whether any elements of this stream match the provided predicate.
      *
      * @param predicate a predicate to apply to each element
-     * @return true at least one element satisfies the testing function
+     * @return true if at least one element satisfies the testing function
      * @throws IllegalArgumentException if predicate is null
      */
     public boolean anyMatch(Predicate<? super T> predicate) {
@@ -208,9 +208,13 @@ public final class Stream<T> {
      *
      * @param comparator a Comparator to compare elements of this stream
      * @return the maximum element of this stream
-     * @throws NoSuchElementException if the collection is empty
+     * @throws NoSuchElementException   if the collection is empty
+     * @throws IllegalArgumentException if comparator is null
      */
     public T max(Comparator<? super T> comparator) {
+        if (comparator == null)
+            throw new IllegalArgumentException("comparator must not be null");
+
         return Collections.max(this.list, comparator);
     }
 
@@ -219,10 +223,25 @@ public final class Stream<T> {
      *
      * @param comparator a Comparator to compare elements of this stream
      * @return the minimum element of this stream
-     * @throws NoSuchElementException if the collection is empty
+     * @throws NoSuchElementException   if the collection is empty
+     * @throws IllegalArgumentException if comparator is null
      */
     public T min(Comparator<? super T> comparator) {
+        if (comparator == null)
+            throw new IllegalArgumentException("comparator must not be null");
+
         return Collections.min(this.list, comparator);
+    }
+
+    /**
+     * Returns whether no elements of this stream match the provided predicate.
+     *
+     * @param predicate a predicate to apply to each element
+     * @return false if at least one element satisfies the testing function
+     * @throws IllegalArgumentException if predicate is null
+     */
+    public boolean noneMatch(Predicate<? super T> predicate) {
+        return !anyMatch(predicate);
     }
 
     /**
