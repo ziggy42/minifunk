@@ -69,8 +69,7 @@ public final class Enumerable<T> {
         for (T t : list)
             if (predicate.test(t))
                 filtered.add(t);
-        this.list = filtered;
-        return this;
+        return new Enumerable<T>(filtered);
     }
 
     /**
