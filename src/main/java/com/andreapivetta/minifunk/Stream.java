@@ -47,6 +47,29 @@ public final class Stream<T> {
     }
 
     /**
+     * Creates an {@link Stream} instance from some values
+     *
+     * @param values the starting values
+     * @return the {@link Stream} instance
+     * @throws IllegalArgumentException if array is null
+     */
+    public static <T> Stream<T> of(T... values) {
+        return from(values);
+    }
+
+    /**
+     * Creates an {@link Stream} instance from one value
+     *
+     * @param value the starting value
+     * @return the {@link Stream} instance
+     * @throws IllegalArgumentException if array is null
+     */
+    public static <T> Stream<T> of(T value) {
+        //noinspection ArraysAsListWithZeroOrOneArgument
+        return from(Arrays.asList(value));
+    }
+
+    /**
      * Returns whether all elements of this stream match the provided predicate.
      *
      * @param predicate a predicate to apply to each element

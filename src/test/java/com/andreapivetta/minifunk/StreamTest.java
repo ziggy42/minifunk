@@ -17,7 +17,7 @@ public class StreamTest {
 
     @Test
     public void allMatch() throws Exception {
-        assertTrue(Stream.from(new Integer[]{1, 2, 3, 4})
+        assertTrue(Stream.of(1, 2, 3, 4)
                 .allMatch(new Predicate<Integer>() {
                     @Override
                     public boolean test(Integer integer) {
