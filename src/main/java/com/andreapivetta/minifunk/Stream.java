@@ -53,7 +53,7 @@ public final class Stream<T> {
      * @return true if allMatch element satisfies the testing function.
      * @throws IllegalArgumentException if predicate is null
      */
-    public boolean allMatch(Predicate<T> predicate) {
+    public boolean allMatch(Predicate<? super T> predicate) {
         if (predicate == null)
             throw new IllegalArgumentException("predicate must not be null");
 
@@ -70,7 +70,7 @@ public final class Stream<T> {
      * @return true at least one element satisfies the testing function
      * @throws IllegalArgumentException if predicate is null
      */
-    public boolean anyMatch(Predicate<T> predicate) {
+    public boolean anyMatch(Predicate<? super T> predicate) {
         if (predicate == null)
             throw new IllegalArgumentException("predicate must not be null");
 
@@ -97,7 +97,7 @@ public final class Stream<T> {
      * @return the new {@link Stream}
      * @throws IllegalArgumentException if predicate is null
      */
-    public Stream<T> filter(Predicate<T> predicate) {
+    public Stream<T> filter(Predicate<? super T> predicate) {
         if (predicate == null)
             throw new IllegalArgumentException("predicate must not be null");
 
@@ -115,7 +115,7 @@ public final class Stream<T> {
      * @return the founded element
      * @throws IllegalArgumentException if predicate is null
      */
-    public T findFirst(Predicate<T> predicate) {
+    public T findFirst(Predicate<? super T> predicate) {
         if (predicate == null)
             throw new IllegalArgumentException("predicate must not be null");
 
@@ -132,7 +132,7 @@ public final class Stream<T> {
      * @param action the action to be performed for each element
      * @throws IllegalArgumentException if action is null
      */
-    public void forEach(Consumer<T> action) {
+    public void forEach(Consumer<? super T> action) {
         if (action == null)
             throw new IllegalArgumentException("action must not be null");
 
@@ -149,7 +149,7 @@ public final class Stream<T> {
      * @return the new {@link Stream}
      * @throws IllegalArgumentException if mapper is null
      */
-    public <R> Stream<R> map(Function<T, R> mapper) {
+    public <R> Stream<R> map(Function<? super T, ? extends R> mapper) {
         if (mapper == null)
             throw new IllegalArgumentException("mapper must not be null");
 
@@ -169,7 +169,7 @@ public final class Stream<T> {
      * @return the result of the reduction
      * @throws IllegalArgumentException if operator is null
      */
-    public <R> R reduce(R accumulator, BiFunction<T, R> operator) {
+    public <R> R reduce(R accumulator, BiFunction<? super T, R> operator) {
         if (operator == null)
             throw new IllegalArgumentException("operator must not be null");
 
@@ -185,7 +185,7 @@ public final class Stream<T> {
      * @return the result of the sorted
      * @throws IllegalArgumentException if comparator is null
      */
-    public Stream<T> sorted(Comparator<T> comparator) {
+    public Stream<T> sorted(Comparator<? super T> comparator) {
         if (comparator == null)
             throw new IllegalArgumentException("comparator must not be null");
 
