@@ -47,27 +47,46 @@ public final class Stream<T> {
     }
 
     /**
-     * Returns a {@link List} from the current {@link Stream} instance
+     * Returns whether all elements of this stream match the provided predicate.
      *
-     * @return the list
+     * @param predicate a predicate to apply to each element
+     * @return true if allMatch element satisfies the testing function.
+     * @throws IllegalArgumentException if predicate is null
      */
-    public List<T> asList() {
-        return this.list;
+    public boolean allMatch(Predicate<T> predicate) {
+        if (predicate == null)
+            throw new IllegalArgumentException("predicate must not be null");
+
+        for (T t : this.list)
+            if (!predicate.test(t))
+                return false;
+        return true;
     }
 
     /**
-     * Performs the given action for each element of the {@link Stream} until all elements have been processed or
-     * the action throws an exception. Exceptions thrown by the action are relayed to the caller.
+     * Returns whether any elements of this stream match the provided predicate.
      *
-     * @param action the action to be performed for each element
-     * @throws IllegalArgumentException if action is null
+     * @param predicate a predicate to apply to each element
+     * @return true at least one element satisfies the testing function
+     * @throws IllegalArgumentException if predicate is null
      */
-    public void forEach(Consumer<T> action) {
-        if (action == null)
-            throw new IllegalArgumentException("action must not be null");
+    public boolean anyMatch(Predicate<T> predicate) {
+        if (predicate == null)
+            throw new IllegalArgumentException("predicate must not be null");
 
         for (T t : this.list)
-            action.accept(t);
+            if (predicate.test(t))
+                return true;
+        return false;
+    }
+
+    /**
+     * Counts the elements contained by this {@link Stream}
+     *
+     * @return the count
+     */
+    public int count() {
+        return this.list.size();
     }
 
     /**
@@ -87,6 +106,38 @@ public final class Stream<T> {
             if (predicate.test(t))
                 filtered.add(t);
         return new Stream<T>(filtered);
+    }
+
+    /**
+     * Returns the value of the first element that satisfies the provided testing function. Otherwise null is returned.
+     *
+     * @param predicate a predicate to apply to each element to determine if it should be returned
+     * @return the founded element
+     * @throws IllegalArgumentException if predicate is null
+     */
+    public T findFirst(Predicate<T> predicate) {
+        if (predicate == null)
+            throw new IllegalArgumentException("predicate must not be null");
+
+        for (T t : this.list)
+            if (predicate.test(t))
+                return t;
+        return null;
+    }
+
+    /**
+     * Performs the given action for each element of the {@link Stream} until all elements have been processed or
+     * the action throws an exception. Exceptions thrown by the action are relayed to the caller.
+     *
+     * @param action the action to be performed for each element
+     * @throws IllegalArgumentException if action is null
+     */
+    public void forEach(Consumer<T> action) {
+        if (action == null)
+            throw new IllegalArgumentException("action must not be null");
+
+        for (T t : this.list)
+            action.accept(t);
     }
 
     /**
@@ -131,10 +182,10 @@ public final class Stream<T> {
      * Returns an {@link Stream} consisting of the sorted version of the current one.
      *
      * @param comparator the comparator function
-     * @return the result of the sort
+     * @return the result of the sorted
      * @throws IllegalArgumentException if comparator is null
      */
-    public Stream<T> sort(Comparator<T> comparator) {
+    public Stream<T> sorted(Comparator<T> comparator) {
         if (comparator == null)
             throw new IllegalArgumentException("comparator must not be null");
 
@@ -144,63 +195,12 @@ public final class Stream<T> {
     }
 
     /**
-     * Returns the value of the first element that satisfies the provided testing function. Otherwise null is returned.
+     * Returns a {@link List} from the current {@link Stream} instance
      *
-     * @param predicate a predicate to apply to each element to determine if it should be returned
-     * @return the founded element
-     * @throws IllegalArgumentException if predicate is null
+     * @return the list
      */
-    public T find(Predicate<T> predicate) {
-        if (predicate == null)
-            throw new IllegalArgumentException("predicate must not be null");
-
-        for (T t : this.list)
-            if (predicate.test(t))
-                return t;
-        return null;
-    }
-
-    /**
-     * Returns true if every element satisfies the provided testing function.
-     *
-     * @param predicate a predicate to apply to each element
-     * @return true if every element satisfies the testing function.
-     * @throws IllegalArgumentException if predicate is null
-     */
-    public boolean every(Predicate<T> predicate) {
-        if (predicate == null)
-            throw new IllegalArgumentException("predicate must not be null");
-
-        for (T t : this.list)
-            if (!predicate.test(t))
-                return false;
-        return true;
-    }
-
-    /**
-     * Returns true if at least one element satisfies the provided testing function.
-     *
-     * @param predicate a predicate to apply to each element
-     * @return true at least one element satisfies the testing function
-     * @throws IllegalArgumentException if predicate is null
-     */
-    public boolean some(Predicate<T> predicate) {
-        if (predicate == null)
-            throw new IllegalArgumentException("predicate must not be null");
-
-        for (T t : this.list)
-            if (predicate.test(t))
-                return true;
-        return false;
-    }
-
-    /**
-     * Counts the elements contained by this {@link Stream}
-     *
-     * @return the count
-     */
-    public int count() {
-        return this.list.size();
+    public List<T> toList() {
+        return this.list;
     }
 
     @Override

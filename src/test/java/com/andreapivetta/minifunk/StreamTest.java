@@ -16,20 +16,73 @@ import static org.junit.Assert.*;
 public class StreamTest {
 
     @Test
-    public void asList() throws Exception {
-        List<String> strings = Stream
+    public void allMatch() throws Exception {
+        assertTrue(Stream.from(new Integer[]{1, 2, 3, 4})
+                .allMatch(new Predicate<Integer>() {
+                    @Override
+                    public boolean test(Integer integer) {
+                        return integer > 0;
+                    }
+                }));
+    }
+
+    @Test
+    public void anyMatch() throws Exception {
+        assertTrue(Stream.from(new Integer[]{1, 2, 3, 4})
+                .anyMatch(new Predicate<Integer>() {
+                    @Override
+                    public boolean test(Integer integer) {
+                        return integer > 2;
+                    }
+                }));
+    }
+
+    @Test
+    public void count() throws Exception {
+        assertEquals(4, Stream.from(Arrays.asList(1, 2, 3, 4)).count());
+    }
+
+    @Test
+    public void filter() throws Exception {
+        List<String> result = Stream
                 .from(Arrays.asList("apple", "pear", "lemon"))
-                .asList();
+                .filter(new Predicate<String>() {
+                    @Override
+                    public boolean test(String value) {
+                        return value.length() > 4;
+                    }
+                })
+                .toList();
 
-        assertNotNull(strings);
-        assertEquals(3, strings.size());
+        assertEquals(2, result.size());
+        assertTrue(result.contains("apple"));
+        assertTrue(result.contains("lemon"));
+    }
 
-        strings = Stream
-                .from(new String[]{"apple", "pear", "lemon"})
-                .asList();
+    @Test
+    public void findFirst() throws Exception {
+        String value = Stream
+                .from(Arrays.asList("Inter", "Milan", "Juventus"))
+                .findFirst(new Predicate<String>() {
+                    @Override
+                    public boolean test(String s) {
+                        return s.startsWith("J");
+                    }
+                });
 
-        assertNotNull(strings);
-        assertEquals(3, strings.size());
+        assertNotNull(value);
+        assertEquals("Juventus", value);
+
+        value = Stream
+                .from(Arrays.asList("Inter", "Milan", "Juventus"))
+                .findFirst(new Predicate<String>() {
+                    @Override
+                    public boolean test(String s) {
+                        return s.startsWith("R");
+                    }
+                });
+
+        assertNull(value);
     }
 
     @Test
@@ -51,23 +104,6 @@ public class StreamTest {
     }
 
     @Test
-    public void filter() throws Exception {
-        List<String> result = Stream
-                .from(Arrays.asList("apple", "pear", "lemon"))
-                .filter(new Predicate<String>() {
-                    @Override
-                    public boolean test(String value) {
-                        return value.length() > 4;
-                    }
-                })
-                .asList();
-
-        assertEquals(2, result.size());
-        assertTrue(result.contains("apple"));
-        assertTrue(result.contains("lemon"));
-    }
-
-    @Test
     public void map() throws Exception {
         List<Integer> result = Stream
                 .from(Arrays.asList("apple", "pear", "lemon"))
@@ -77,7 +113,7 @@ public class StreamTest {
                         return value.length();
                     }
                 })
-                .asList();
+                .toList();
 
         assertEquals(3, result.size());
         assertEquals(Integer.valueOf(5), result.get(0));
@@ -112,16 +148,16 @@ public class StreamTest {
     }
 
     @Test
-    public void sort() throws Exception {
+    public void sorted() throws Exception {
         List<String> strings = Stream
                 .from(Arrays.asList("Real Madrid", "Inter", "Milan", "Juventus"))
-                .sort(new Comparator<String>() {
+                .sorted(new Comparator<String>() {
                     @Override
                     public int compare(String s, String t1) {
                         return s.compareTo(t1);
                     }
                 })
-                .asList();
+                .toList();
 
         assertNotNull(strings);
         assertEquals(4, strings.size());
@@ -129,57 +165,20 @@ public class StreamTest {
     }
 
     @Test
-    public void find() throws Exception {
-        String value = Stream
-                .from(Arrays.asList("Inter", "Milan", "Juventus"))
-                .find(new Predicate<String>() {
-                    @Override
-                    public boolean test(String s) {
-                        return s.startsWith("J");
-                    }
-                });
+    public void toList() throws Exception {
+        List<String> strings = Stream
+                .from(Arrays.asList("apple", "pear", "lemon"))
+                .toList();
 
-        assertNotNull(value);
-        assertEquals("Juventus", value);
+        assertNotNull(strings);
+        assertEquals(3, strings.size());
 
-        value = Stream
-                .from(Arrays.asList("Inter", "Milan", "Juventus"))
-                .find(new Predicate<String>() {
-                    @Override
-                    public boolean test(String s) {
-                        return s.startsWith("R");
-                    }
-                });
+        strings = Stream
+                .from(new String[]{"apple", "pear", "lemon"})
+                .toList();
 
-        assertNull(value);
-    }
-
-    @Test
-    public void every() throws Exception {
-        assertTrue(Stream.from(new Integer[]{1, 2, 3, 4})
-                .every(new Predicate<Integer>() {
-                    @Override
-                    public boolean test(Integer integer) {
-                        return integer > 0;
-                    }
-                }));
-    }
-
-    @Test
-    public void some() throws Exception {
-        assertTrue(Stream.from(new Integer[]{1, 2, 3, 4})
-                .some(new Predicate<Integer>() {
-                          @Override
-                          public boolean test(Integer integer) {
-                              return integer > 2;
-                          }
-                      }
-                ));
-    }
-
-    @Test
-    public void count() throws Exception {
-        assertEquals(4, Stream.from(Arrays.asList(1, 2, 3, 4)).count());
+        assertNotNull(strings);
+        assertEquals(3, strings.size());
     }
 
     @Test
