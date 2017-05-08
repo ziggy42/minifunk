@@ -14,7 +14,7 @@ import java.util.*;
  */
 public final class Stream<T> {
 
-    private List<T> list;
+    private final List<T> list;
 
     private Stream(List<T> list) {
         this.list = list;
