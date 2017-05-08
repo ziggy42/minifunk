@@ -61,7 +61,6 @@ public final class Stream<T> {
      *
      * @param value the starting value
      * @return the {@link Stream} instance
-     * @throws IllegalArgumentException if array is null
      */
     public static <T> Stream<T> of(T value) {
         //noinspection ArraysAsListWithZeroOrOneArgument
