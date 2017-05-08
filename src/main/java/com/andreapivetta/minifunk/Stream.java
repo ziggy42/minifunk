@@ -51,7 +51,6 @@ public final class Stream<T> {
      *
      * @param values the starting values
      * @return the {@link Stream} instance
-     * @throws IllegalArgumentException if array is null
      */
     public static <T> Stream<T> of(T... values) {
         return from(values);
