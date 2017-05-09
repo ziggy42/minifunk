@@ -1,4 +1,6 @@
 # minifunk
+[ ![Download](https://api.bintray.com/packages/ziggy42/minifunk/minifunk/images/download.svg) ](https://bintray.com/ziggy42/minifunk/minifunk/_latestVersion)   
+   
 This library targets `Java 6` and wraps a `T[]` or `List<T>` to add:
 * `allMatch`
 * `anyMatch`
