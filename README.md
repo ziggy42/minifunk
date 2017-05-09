@@ -33,3 +33,21 @@ Stream
         }
     });
 ```
+## Usage
+Add repository:
+```groovy
+repositories {
+    maven {
+        url  "http://dl.bintray.com/ziggy42/minifunk"
+    }
+    ...
+}
+```
+
+Add dependency:
+```groovy
+dependencies {
+    compile 'com.andreapivetta.minifunk:minifunk:0.0.1'
+    ...
+}
+```
